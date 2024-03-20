@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPL Fantasy</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .team-logo {
+      width: 50px; /* Adjust size as needed */
+      height: 100%;
+      margin-right: 5px;
+    }
+    .player-name {
+    margin-right: 15px; /* Adjust as needed */
+}
+  </style>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">IPL Fantasy</h1>
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+        <label>Select Teams:</label><br>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="MI" value="MI">
+            <label class="form-check-label" for="MI">
+                <img class="team-logo" src="img/mi-mumbai-indians-logo-1B73C4A6F7-seeklogo.com.png" alt="MI Logo">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="CSK" value="CSK">
+            <label class="form-check-label" for="CSK">
+                <img class="team-logo" src="img/chennai-super-kings3461.png" alt="CSK Logo">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="RCB" value="RCB">
+            <label class="form-check-label" for="RCB">
+                <img class="team-logo" src="img/RCB.png" alt="RCB LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="RR" value="RR">
+            <label class="form-check-label" for="RR">
+                <img class="team-logo" src="img/RR.png" alt="RR LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="GT" value="GT">
+            <label class="form-check-label" for="GT">
+                <img class="team-logo" src="img/GT.png" alt="GT LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="DC" value="DC">
+            <label class="form-check-label" for="DC">
+                <img class="team-logo" src="img/DC.png" alt="DC LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="LSG" value="LSG">
+            <label class="form-check-label" for="LSG">
+                <img class="team-logo" src="img/LSG.png" alt="LSG LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="SRH" value="SRH">
+            <label class="form-check-label" for="SRH">
+                <img class="team-logo" src="img/SRH.png" alt="SRH LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="KKR" value="KKR">
+            <label class="form-check-label" for="KKR">
+                <img class="team-logo" src="img/KKR.png" alt="KKR LOGO">
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="KINGS-XII" value="KINGS-XII">
+            <label class="form-check-label" for="KINGS-XII">
+                <img class="team-logo" src="img/X-11.png" alt="KINGS-XII LOGO">
+            </label>
+        </div>
+       
+       
+       
+       
+    </div>
+    <div id="selectedTeams" class="mt-4">
+    </div>
+    
+    <form id="playerForm">
+        <div class="form-group">
+            <label for="playerName"><h4>Player Name & Make Your Team:</h4></label>
+            <input type="text" class="form-control" id="playerName" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Player</button>
+    </form>
+  
+    <div id="playerList" class="mt-4">
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+    var playerCount = 0; // Variable to count the number of players added
+
+    // Submit form to add player
+    $('#playerForm').submit(function(e) {
+        e.preventDefault();
+        var playerName = $('#playerName').val();
+        // Add player to list if player count is less than 12
+        if (playerCount < 12) {
+            $('#playerList').append('<div class="card" id="player' + playerCount + '"><div class="card-body"><span class="player-name">' + playerName + '</span><button type="button" class="btn btn-primary edit-player" data-player-id="' + playerCount + '">Edit</button></div></div>');
+            playerCount++; // Increment player count
+        } else {
+            alert('Maximum 12 players can be added.');
+        }
+        // Clear input field
+        $('#playerName').val('');
+    });
+
+    // Edit player name
+    $(document).on('click', '.edit-player', function() {
+        var playerId = $(this).data('player-id');
+        var playerName = $('#player' + playerId + ' .player-name').text();
+        var editedName = prompt('Edit Player Name:', playerName);
+        if (editedName !== null && editedName !== '') {
+            $('#player' + playerId + ' .player-name').text(editedName);
+        }
+    });
+
+    // Display selected teams when checkbox is clicked
+    $('input[type="checkbox"]').change(function() {
+        var selectedTeams = [];
+        $('input[type="checkbox"]:checked').each(function() {
+            selectedTeams.push($(this).val());
+        });
+        $('#selectedTeams').html('<strong>Selected Teams:</strong><br>' + selectedTeams.join('</br>'));
+    });
+});
+
+
+</script>
+</script>
+</body>
+</html>
