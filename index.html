@@ -8,12 +8,12 @@
 </head>
 <style>
     .team-logo {
-      width: 50px; /* Adjust size as needed */
+      width: 50px;
       height: 100%;
       margin-right: 5px;
     }
     .player-name {
-    margin-right: 15px; /* Adjust as needed */
+    margin-right: 15px; 
 }
   </style>
 <body>
@@ -99,6 +99,52 @@
   
     <div id="playerList" class="mt-4">
     </div>
+    <div class="mt-4">
+        <h4>Player Teams and Points:</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                    <th>Team 3</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody id="playerTableBody">
+                <tr>
+                    <td>Parth</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <td>Dhruv</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <td>Pranay</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <td>Deversh</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -106,9 +152,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
-    var playerCount = 0; // Variable to count the number of players added
-
-    // Submit form to add player
+    var playerCount = 0; 
     $('#playerForm').submit(function(e) {
         e.preventDefault();
         var playerName = $('#playerName').val();
